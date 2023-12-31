@@ -8,7 +8,6 @@ export default function CreatePost() {
     const [description, setDescription] = useState("")
     const [loading, setLoading] = useState(false)
 
-
     const Firebase = useFirebase();
 
     const handleSubmit = async (e) => {
@@ -20,12 +19,9 @@ export default function CreatePost() {
         else
             alert("Something Went Worng")
 
-
         setLoading(false)
         setTitle("")
         setDescription("")
-        // setImage([])
-
     }
     return (
         <div className='my-5'>
@@ -52,7 +48,8 @@ export default function CreatePost() {
                                 <input type="text" className="form-control" id="exampleInputPassword1" required value={description} onChange={(e) => setDescription(e.target.value)} />
                             </div>
 
-                            <button type="submit" className="btn btn-primary" disabled={loading} >Create Post </button>
+                            <button type="submit" className="btn btn-primary" disabled={loading} >Create Post </button><br></br>
+                            {loading && <span className='text-danger'> Creating Post Please Wait ... </span>}
                         </form>
 
                     </div>

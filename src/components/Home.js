@@ -9,26 +9,25 @@ export default function Home() {
 
 
     const refreshFunc = () => {
-        firebase.getAllPosts().then((data) => setAllPosts(data.docs))
+        firebase.getAllPosts().then((data) =>
+            setAllPosts(data.docs))
     }
 
-
     useEffect(() => {
-        firebase.getAllPosts().then((data) => setAllPosts(data.docs))
-    }, [])
-
-
+        firebase.getAllPosts().then((data) =>
+            setAllPosts(data.docs))
+    })
 
     return (
         <div>
-
             {allPosts.map((e) => {
                 return (
-                    <PostsCard key={e.id} id={e.id} data={e.data()} refreshFunc={refreshFunc} />)
-            }
-            )}
-
-
+                    <PostsCard
+                        key={e.id}
+                        id={e.id}
+                        data={e.data()}
+                        refreshFunc={refreshFunc} />)
+            })}
         </div >
     )
 }

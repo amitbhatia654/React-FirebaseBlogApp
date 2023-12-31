@@ -13,6 +13,7 @@ import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
   doc,
   deleteDoc,
   updateDoc,
@@ -59,7 +60,6 @@ export const FireBaseProvider = (props) => {
       await signInWithEmailAndPassword(firebaseAuth, email, password);
       return "Loggin SuccessFully";
     } catch (error) {
-      // console.log(error.message, "noww");
       return error.message;
     }
   };
@@ -84,6 +84,12 @@ export const FireBaseProvider = (props) => {
 
   const getAllPosts = () => {
     return getDocs(collection(fireStore, "blogposts"));
+  };
+
+  const getPostbyId = async (id) => {
+    const docRef = doc(fireStore, "blogposts", id);
+    const result = await getDoc(docRef);
+    return result.data();
   };
 
   const getImageUrl = (path) => {
@@ -130,6 +136,7 @@ export const FireBaseProvider = (props) => {
         isUserLoggedIn,
         handleCreateNewPost,
         getAllPosts,
+        getPostbyId,
         getImageUrl,
         deletePost,
         SignOutUser,

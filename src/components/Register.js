@@ -10,34 +10,32 @@ export default function Register() {
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
 
 
     const Firebase = useFirebase();
-    // console.log("Details of firebase", Firebase)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setLoading(true)
         const result = await Firebase.signupUserWithEmailAndPass(email, password)
+        setLoading(false)
 
         if (result === "Register Successfully") {
             navigate("/")
             setEmail("")
             setPassword("")
-
         }
-
         else
             setError(result)
-
-
     }
     return (
         <div>
             <div className='container'>
                 <div className='row'>
 
-                    <h1>Create Account  </h1>
+                    <h1>Create New Account  </h1>
                     <div className='col-md-6 border'>
 
                         <form onSubmit={handleSubmit}>
@@ -59,10 +57,10 @@ export default function Register() {
                                 <input type="password" className="form-control" id="exampleInputPassword1" required onChange={(e) => setPassword(e.target.value)} />
                             </div>
 
-                            <button type="submit" className="btn btn-primary" >Register </button>
+                            <button type="submit" className="btn btn-primary" disabled={loading} >Register </button>
                         </form>
 
-                        {error && error}
+                        {error && <span className='text-danger'>{error}</span>}
 
                     </div>
                 </div>
