@@ -19,15 +19,19 @@ export default function Home() {
     })
 
     return (
-        <div>
-            {allPosts.map((e) => {
-                return (
-                    <PostsCard
-                        key={e.id}
-                        id={e.id}
-                        data={e.data()}
-                        refreshFunc={refreshFunc} />)
-            })}
+        <div className='container-fluid my-5'>
+            <div className='row'>
+                {allPosts.map((e) => {
+                    return (
+                        <div className='col-md-4 my-2  '>
+                            <PostsCard
+                                key={e.id}
+                                id={e.id}
+                                data={e.data()}
+                                refreshFunc={refreshFunc} />
+                        </div>)
+                })}
+            </div>
         </div >
     )
 }
